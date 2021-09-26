@@ -3,11 +3,11 @@ const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
-const passport = require("passport");
 
 // Load input validation
 const validateRegisterInput = require("../../validation/register");
 const validateLoginInput = require("../../validation/login");
+const validateUpdateUser = require("../../validation/updateUser");
 
 // Load User model
 const User = require("../../models/User");
@@ -17,7 +17,6 @@ const User = require("../../models/User");
 // @access Public
 router.post("/register", (req, res) => {
   // Form validation
-
   const { errors, isValid } = validateRegisterInput(req.body);
 
   // Check validation
@@ -33,6 +32,7 @@ router.post("/register", (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: req.body.password,
+        gender: req.body.gender,
       });
 
       // Hash password before saving in database
@@ -81,6 +81,7 @@ router.post("/login", (req, res) => {
         const payload = {
           id: user.id,
           name: user.name,
+          email: user.email,
         };
 
         // Sign token
@@ -106,4 +107,44 @@ router.post("/login", (req, res) => {
   });
 });
 
+// @route POST api/users/getUserDetails
+// @desc Login user and return JWT token
+// @access Public
+router.post("/getUserDetails", (req, res) => {
+  User.findOne({ email: req.body.email }).then((user) => {
+    console.log(user);
+    if (!user) {
+      return res.status(400).json({ email: "User not Exist" });
+    } else {
+      res.json(user);
+    }
+  });
+});
+
+// @route POST api/users/updateUser
+// @desc Register user
+// @access Public
+router.post("/updateUser", (req, res) => {
+  // Form validation
+  const { errors, isValid } = validateUpdateUser(req.body);
+
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  console.log(req.body);
+  const dataToupdate = {
+    name: req.body.name,
+    gender: req.body.gender,
+    phone: req.body.phone,
+    address: req.body.address,
+  };
+  User.updateOne({ email: req.body.email }, dataToupdate).then((err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      return res.send(true);
+    }
+  });
+});
 module.exports = router;

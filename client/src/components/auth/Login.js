@@ -1,142 +1,150 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { PropTypes } from "prop-types";
+import { connect, useDispatch } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import { GET_ERRORS } from "./../../actions/types";
+import Button from "../buttons";
 
-class Login extends Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      errors: {}
-    };
-  }
-
-  componentDidMount() {
-    // If logged in and user navigates to Login page, should redirect them to dashboard
-    if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+const userState = {
+  email: "",
+  password: "",
+};
+const Login = ({ loginUser, auth, errors }) => {
+  const [userDetails, setUserDetails] = useState(userState);
+  const { email, password } = userDetails;
+  const history = useHistory();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      history.push({ pathName: "/dashboard" });
     }
-  }
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
+  }, []);
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      history.push("/dashboard");
     }
+  }, [auth.isAuthenticated]);
 
-    if (nextProps.errors) {
-      this.setState({
-        errors: nextProps.errors
-      });
-    }
-  }
-
-  onChange = e => {
-    this.setState({ [e.target.id]: e.target.value });
+  const handleOnChange = (e) => {
+    setUserDetails({ ...userDetails, [e.target.id]: e.target.value });
   };
 
-  onSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
     const userData = {
-      email: this.state.email,
-      password: this.state.password
+      email,
+      password,
     };
-
-    this.props.loginUser(userData);
+    loginUser(userData);
   };
 
-  render() {
-    const { errors } = this.state;
-
-    return (
-      <div className="container">
-        <div style={{ marginTop: "4rem" }} className="row">
-          <div className="col s8 offset-s2">
-            <Link to="/" className="btn-flat waves-effect">
-              <i className="material-icons left">keyboard_backspace</i> Back to
-              home
-            </Link>
+  return (
+    <div
+      className="row h-full login-bg"
+      style={{
+        paddingBottom: 0,
+        marginBottom: 0,
+      }}
+    >
+      <div className="col l8 m6"></div>
+      <div className="col l4 m6 s12 right-container">
+        <div className="login-container">
+          <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+            <h4>
+              <b>Login</b>
+            </h4>
+          </div>
+          <form noValidate onSubmit={handleSubmit}>
+            <div className="input-field col s12">
+              <input
+                onChange={handleOnChange}
+                value={email}
+                error={errors.email}
+                id="email"
+                type="email"
+                className={classnames("", {
+                  invalid: errors.email || errors.emailnotfound,
+                })}
+              />
+              <label htmlFor="email">Email</label>
+              <span className="red-text">
+                {errors.email}
+                {errors.emailnotfound}
+              </span>
+            </div>
+            <div className="input-field col s12">
+              <input
+                onChange={handleOnChange}
+                value={password}
+                error={errors.password}
+                id="password"
+                type="password"
+                className={classnames("", {
+                  invalid: errors.password || errors.passwordincorrect,
+                })}
+              />
+              <label htmlFor="password">Password</label>
+              <span className="red-text">
+                {errors.password}
+                {errors.passwordincorrect}
+              </span>
+            </div>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-              <h4>
-                <b>Login</b> below
-              </h4>
+              <Button text="Log In" variant="primary" type="submit" />
               <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
+                Don't have an account?{" "}
+                <Link className="orange-text" to="/register">
+                  <b>Sign up</b>
+                </Link>
               </p>
             </div>
-            <form noValidate onSubmit={this.onSubmit}>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email || errors.emailnotfound
-                  })}
-                />
-                <label htmlFor="email">Email</label>
-                <span className="red-text">
-                  {errors.email}
-                  {errors.emailnotfound}
-                </span>
-              </div>
-              <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect
-                  })}
-                />
-                <label htmlFor="password">Password</label>
-                <span className="red-text">
-                  {errors.password}
-                  {errors.passwordincorrect}
-                </span>
-              </div>
-              <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
-                  style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                  }}
-                  type="submit"
-                  className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                >
-                  Login
-                </button>
-              </div>
-            </form>
+          </form>
+          <div className="pad-sm social-container">
+            <button
+              className="btn-floating btn-medium google-bg waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              <i className="fab fa-google"></i>
+            </button>
+            <button
+              className="btn-floating btn-medium linkedin-bg waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              <i className="fab fa-linkedin-in"></i>
+            </button>
+
+            <button
+              className="btn-floating btn-medium facebook-bg waves-effect waves-light"
+              type="submit"
+              name="action"
+            >
+              <i className="fab fa-facebook-f"></i>
+            </button>
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 Login.propTypes = {
   loginUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  errors: PropTypes.object.isRequired
+  errors: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { loginUser }
-)(Login);
+export default connect(mapStateToProps, { loginUser })(Login);

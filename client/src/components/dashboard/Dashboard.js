@@ -1,57 +1,43 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { logoutUser } from "../../actions/authActions";
 
-class Dashboard extends Component {
-  onLogoutClick = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
+import { getUserDetails } from "../../actions/userActions";
+import Navbar from "../layout/Navbar";
+import Topbar from "../layout/Topbar";
+import Profile from "../profile";
 
-  render() {
-    const { user } = this.props.auth;
+const Dashboard = ({ getUserDetails, user, auth, errors }) => {
+  const { userData } = user;
+  useEffect(() => {
+    getUserDetails(auth.user.email);
+  }, [auth]);
 
-    return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="landing-copy col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a full-stack{" "}
-                <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
-              </p>
-            </h4>
-            <button
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
-              onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-              Logout
-            </button>
-          </div>
+  return (
+    <div className="row h-full" style={{ marginBottom: 0 }} id="dashboard">
+      <Topbar />
+      <div className="content">
+        <Navbar />
+
+        <div className="dashboard-content">
+          <Profile userDetails={userData} errors={errors} />
         </div>
       </div>
-    );
-  }
-}
-
-Dashboard.propTypes = {
-  logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+    </div>
+  );
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+Dashboard.propTypes = {
+  getUserDetails: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user,
+  auth: state.auth,
+  errors: state.errors,
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Dashboard);
+export default connect(mapStateToProps, { getUserDetails })(Dashboard);
