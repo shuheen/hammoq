@@ -20,14 +20,15 @@ code {
 
 .login-bg{
   background-image: url('../src/assets/img/login-bg.jpg');
-  background-size: cover;
+  background-size: 90%;
   background-repeat: no-repeat;
-  background-position-y: bottom;
+  background-position-y: center;
 }
 .register-bg{
   background-image: url('../src/assets/img/register-bg.jpg');
-  background-size: cover;
+  background-size: 90%;
   background-repeat: no-repeat;
+  background-position-y: center;
 }
 .right-container{
   display: flex;
@@ -35,12 +36,21 @@ code {
   height: 100vh;
 }
 .login-container{
-  background-color: #ffffffee;
-  box-shadow: 0px 0px 20px rgba(105, 105, 105, 0.2);
+  background-color: rgb(236 245 255 / 78%);
+  border:1px solid rgb(247, 247, 247);
   height: auto;
   margin: 10px;
   padding: 30px;
   border-radius: 5px;
+  position: relative;
+}
+#register-form .input-style, #login-form .input-style{
+  background-color: #fff;
+  padding:0 10px;
+  box-shadow: 0px 0px 8px rgb(224, 224, 224);
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 .pad-xs{
   padding: 5px;
@@ -213,4 +223,13 @@ background-color: #007bb6;
   font-size: 12px;
   color:rgb(139, 139, 139);
 
+}
+
+@media (max-width:768px) {
+  .login-bg{
+    background-image: none;
+  }
+  .register-bg{
+    background-image: none;
+  }
 }

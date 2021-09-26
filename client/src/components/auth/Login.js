@@ -61,19 +61,19 @@ const Login = ({ loginUser, auth, errors }) => {
               <b>Login</b>
             </h4>
           </div>
-          <form noValidate onSubmit={handleSubmit}>
+          <form noValidate onSubmit={handleSubmit} id="login-form">
             <div className="input-field col s12">
               <input
                 onChange={handleOnChange}
                 value={email}
                 error={errors.email}
+                placeholder="Email"
                 id="email"
                 type="email"
-                className={classnames("", {
+                className={classnames("input-style", {
                   invalid: errors.email || errors.emailnotfound,
                 })}
               />
-              <label htmlFor="email">Email</label>
               <span className="red-text">
                 {errors.email}
                 {errors.emailnotfound}
@@ -84,13 +84,13 @@ const Login = ({ loginUser, auth, errors }) => {
                 onChange={handleOnChange}
                 value={password}
                 error={errors.password}
+                placeholder="Password"
                 id="password"
                 type="password"
-                className={classnames("", {
+                className={classnames("input-style", {
                   invalid: errors.password || errors.passwordincorrect,
                 })}
               />
-              <label htmlFor="password">Password</label>
               <span className="red-text">
                 {errors.password}
                 {errors.passwordincorrect}

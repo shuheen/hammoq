@@ -60,19 +60,19 @@ const Register = ({ registerUser, auth, errors }) => {
               <b>Register</b>
             </h4>
           </div>
-          <form noValidate onSubmit={handleSubmit}>
+          <form noValidate onSubmit={handleSubmit} id="register-form">
             <div className="input-field col s12">
               <input
                 onChange={handleOnChange}
                 value={name}
                 error={errors.name}
                 name="name"
+                placeholder="Name"
                 type="text"
-                className={classnames("", {
+                className={classnames("input-style", {
                   invalid: errors.name,
                 })}
               />
-              <label htmlFor="name">Name</label>
               <span className="red-text">{errors.name}</span>
             </div>
             <div className="input-field col s12">
@@ -80,13 +80,13 @@ const Register = ({ registerUser, auth, errors }) => {
                 onChange={handleOnChange}
                 value={email}
                 error={errors.email}
+                placeholder="Email"
                 name="email"
                 type="email"
-                className={classnames("", {
+                className={classnames("input-style", {
                   invalid: errors.email,
                 })}
               />
-              <label htmlFor="email">Email</label>
               <span className="red-text">{errors.email}</span>
             </div>
             <div className="input-field col s12">
@@ -95,12 +95,12 @@ const Register = ({ registerUser, auth, errors }) => {
                 value={password}
                 error={errors.password}
                 name="password"
+                placeholder="Password"
                 type="password"
-                className={classnames("", {
+                className={classnames("input-style", {
                   invalid: errors.password,
                 })}
               />
-              <label htmlFor="password">Password</label>
               <span className="red-text">{errors.password}</span>
             </div>
             <div className="input-field col s12">
@@ -109,12 +109,12 @@ const Register = ({ registerUser, auth, errors }) => {
                 value={confirmPassword}
                 error={errors.confirmPassword}
                 name="confirmPassword"
+                placeholder="Confirm Password"
                 type="password"
-                className={classnames("", {
+                className={classnames("input-style", {
                   invalid: errors.confirmPassword,
                 })}
               />
-              <label htmlFor="confirmPassword">Confirm Password</label>
               <span className="red-text">{errors.confirmPassword}</span>
             </div>
             <div className="col s12" style={{ marginTop: "10px" }}>
