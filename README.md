@@ -1,10 +1,10 @@
 ## Quick Start
 
 
-Clone the Repository
-Checkout branch `dev`
 
 ```javascript
+Clone the Repository
+Checkout branch `dev`
 // Install dependencies for server & client
 npm install
 // Go to Client Directory
