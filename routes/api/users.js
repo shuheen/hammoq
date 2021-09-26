@@ -112,7 +112,6 @@ router.post("/login", (req, res) => {
 // @access Public
 router.post("/getUserDetails", (req, res) => {
   User.findOne({ email: req.body.email }).then((user) => {
-    console.log(user);
     if (!user) {
       return res.status(400).json({ email: "User not Exist" });
     } else {
@@ -139,12 +138,12 @@ router.post("/updateUser", (req, res) => {
     phone: req.body.phone,
     address: req.body.address,
   };
-  User.updateOne({ email: req.body.email }, dataToupdate).then((err, docs) => {
-    if (err) {
-      console.log(err);
-    } else {
-      return res.send(true);
-    }
-  });
+  User.updateOne({ email: req.body.email }, { $set: dataToupdate })
+    .then((docs) => {
+      docs.nModified ? res.json({ status: true }) : res.json({ status: false });
+    })
+    .catch((err) => {
+      res.json({ status: false });
+    });
 });
 module.exports = router;

@@ -8,7 +8,7 @@ import Topbar from "../layout/Topbar";
 import Profile from "../profile";
 
 const Dashboard = ({ getUserDetails, user, auth, errors }) => {
-  const { userData } = user;
+  const { userData, userUpdated } = user;
   useEffect(() => {
     getUserDetails(auth.user.email);
   }, [auth]);
@@ -20,7 +20,11 @@ const Dashboard = ({ getUserDetails, user, auth, errors }) => {
         <Navbar />
 
         <div className="dashboard-content">
-          <Profile userDetails={userData} errors={errors} />
+          <Profile
+            userDetails={userData}
+            isUserUpdated={userUpdated.status}
+            errors={errors}
+          />
         </div>
       </div>
     </div>

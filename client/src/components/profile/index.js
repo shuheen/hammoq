@@ -5,10 +5,12 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { updateUserDetails } from "../../actions/userActions";
 import Button from "../buttons";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Profile = ({ updateUserDetails, userDetails, errors }) => {
+const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
   const [updatedUserDetails, setUpdatedUserDetails] = useState({});
-
+  let container;
   useEffect(() => {
     setUpdatedUserDetails(userDetails);
   }, [userDetails]);
@@ -46,6 +48,12 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
     };
     updateUserDetails(updateUser);
   };
+  useEffect(() => {
+    if (isUserUpdated) {
+      toast.success("Successfully Updated!!");
+    }
+  }, [isUserUpdated]);
+
   return (
     <div className="row pad-md">
       <div className="col s12">
@@ -65,6 +73,7 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
       <form noValidate className="pad-md" onSubmit={handleSubmit}>
         <div className="col m6 s12">
           <div className="input-field col s12">
+            <span className="label-profile">Name</span>
             <input
               onChange={handleOnChange}
               value={name}
@@ -76,10 +85,11 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
                 invalid: errors.name,
               })}
             />
-            <label htmlFor="name">Name</label>
+
             <span className="red-text">{errors.name}</span>
           </div>
           <div className="input-field col s12">
+            <span className="label-profile">Email</span>
             <input
               onChange={handleOnChange}
               value={email}
@@ -92,10 +102,10 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
                 invalid: errors.email,
               })}
             />
-            <label htmlFor="email">Email</label>
             <span className="red-text">{errors.email}</span>
           </div>
           <div className="input-field col s12">
+            <span className="label-profile">Phone</span>
             <input
               onChange={handleOnChange}
               value={phone}
@@ -108,13 +118,13 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
                 invalid: errors.phone,
               })}
             />
-            <label htmlFor="phone">Phone</label>
             <span className="red-text">{errors.phone}</span>
           </div>
 
           <div className="col s12 pad-sm">
             <label
               htmlFor="gender"
+              className="label-profile"
               style={{ display: "inline-block", marginBottom: "15px" }}
             >
               Gender
@@ -146,6 +156,7 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
         </div>
         <div className="col m6 s12">
           <div className="input-field col s12">
+            <span className="label-profile">Street</span>
             <input
               onChange={handleOnChange}
               value={street}
@@ -157,10 +168,10 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
                 invalid: errors.street,
               })}
             />
-            <label htmlFor="name">Street</label>
             <span className="red-text">{errors.street}</span>
           </div>
           <div className="input-field col s12">
+            <span className="label-profile">City</span>
             <input
               onChange={handleOnChange}
               value={city}
@@ -172,10 +183,10 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
                 invalid: errors.city,
               })}
             />
-            <label htmlFor="name">City</label>
             <span className="red-text">{errors.city}</span>
           </div>
           <div className="input-field col s12">
+            <span className="label-profile">State</span>
             <input
               onChange={handleOnChange}
               value={state}
@@ -187,10 +198,10 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
                 invalid: errors.state,
               })}
             />
-            <label htmlFor="name">State</label>
             <span className="red-text">{errors.state}</span>
           </div>
           <div className="input-field col s12">
+            <span className="label-profile">Country</span>
             <input
               onChange={handleOnChange}
               value={country}
@@ -203,7 +214,6 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
               })}
               data-group="address"
             />
-            <label htmlFor="name">Country</label>
             <span className="red-text">{errors.country}</span>
           </div>
         </div>
@@ -213,6 +223,7 @@ const Profile = ({ updateUserDetails, userDetails, errors }) => {
           </div>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };
