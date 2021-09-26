@@ -1,13 +1,20 @@
 ## Quick Start
 
+
+ # Clone the Repository
+ # Checkout branch `dev`
+
 ```javascript
 // Install dependencies for server & client
-npm install && npm run client-install
-
+npm install
+// Go to Client Directory
+cd `./client`
+// Install Client Dependencies
+run `npm install`
+// Go to root
+cd ../
 // Run client & server with concurrently
 npm run dev
 
 // Server runs on http://localhost:5000 and client on http://localhost:3000
 ```
-
-For deploying to Heroku, please refer to [this](https://www.youtube.com/watch?v=71wSzpLyW9k) helpful video by TraversyMedia.
