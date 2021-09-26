@@ -1,8 +1,8 @@
 ## Quick Start
 
 
- # Clone the Repository
- # Checkout branch `dev`
+Clone the Repository
+Checkout branch `dev`
 
 ```javascript
 // Install dependencies for server & client
