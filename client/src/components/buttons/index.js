@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Button = ({ size, variant, text, type }) => {
   return (
@@ -13,7 +13,7 @@ const Button = ({ size, variant, text, type }) => {
       className={`btn ${
         size === "large" ? "btn-large" : ""
       } waves-effect waves-light hoverable ${
-        variant === "primary" ? "orange" : "blue"
+        variant === "primary" ? "primary-bg" : "blue"
       } blue accent-3`}
     >
       {text}

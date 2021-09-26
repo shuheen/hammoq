@@ -10,17 +10,14 @@ const Topbar = ({ logoutUser }) => {
   };
   return (
     <div className="topbar right-align">
-      <button
-        style={{
-          width: "150px",
-          borderRadius: "3px",
-          letterSpacing: "1.5px",
-        }}
+      <i
+        class="material-icons white-text"
         onClick={onLogoutClick}
-        className="btn btn-small waves-effect waves-light hoverable white black-text accent-3"
+        style={{ cursor: "pointer" }}
+        title="Log out"
       >
-        Logout
-      </button>
+        power_settings_new
+      </i>
     </div>
   );
 };

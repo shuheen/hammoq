@@ -68,14 +68,14 @@ code {
 }
 /* label underline focus color */
 #root .input-field input[type="text"]:focus, #root .input-field input[type="email"]:focus, #root .input-field input[type="password"]:focus {
-  border-bottom: 1px solid #3b5998;
-  box-shadow: 0 1px 0 0 #3b5998;
+  border-bottom: 1px solid #577fd4;
+  box-shadow: 0 1px 0 0 #577fd4;
 }
 #root .social-container button:hover {
-  background-color: #3b5998;
+  background-color: #577fd4;
 }
 #root .input-field label.active{
-  color: #3b5998;
+  color: #577fd4;
 }
 .social-container{
   display: flex;
@@ -85,7 +85,7 @@ code {
   background-color: #dd4b39;
 }
 .facebook-bg{
-  background-color: #3b5998;
+  background-color: #577fd4;
 }
 .linkedin-bg{
 background-color: #007bb6;
@@ -96,8 +96,8 @@ background-color: #007bb6;
 }
 
 [type="radio"]:checked+span:after{
-  background-color: #3b5998;
-  border-color: #3b5998;
+  background-color: #577fd4;
+  border-color: #577fd4;
 }
 .input-field{
   margin-bottom: 0;
@@ -106,10 +106,15 @@ background-color: #007bb6;
   display: flex;
   flex-direction: column;
 }
-
+.primary-bg{
+  background-color: #577fd4;;
+}
+.primary-text{
+  color: #577fd4;;
+}
 .topbar{
   width: 100%;
-  background-color: #3b5998;
+  background-color: #577fd4;
   padding: 10px 15px;
   height: 50px;
   max-height: 60px;
@@ -131,6 +136,7 @@ background-color: #007bb6;
   width: 100%;
   height: 100%;
   background-color: #f9f9f9;
+  overflow: auto;
 }
 .sidenav-items li a {
   padding: 10px;
@@ -152,7 +158,7 @@ background-color: #007bb6;
   background: #f9f9f9; 
 }
 .sidenav-items li.active a i{
-  color: #3b5998
+  color: #577fd4
 }
 
 .sidenav-items li.active:after, .sidenav-items li.active:before{

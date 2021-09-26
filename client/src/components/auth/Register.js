@@ -117,7 +117,7 @@ const Register = ({ registerUser, auth, errors }) => {
               <label htmlFor="confirmPassword">Confirm Password</label>
               <span className="red-text">{errors.confirmPassword}</span>
             </div>
-            <div className="pad-sm">
+            <div className="col s12" style={{ marginTop: "10px" }}>
               <label className="mar-r-lg">
                 <input
                   name="gender"
@@ -144,7 +144,7 @@ const Register = ({ registerUser, auth, errors }) => {
               <Button text="Sign up" variant="primary" type="submit" />
               <p className="grey-text text-darken-1">
                 Already have an account?{" "}
-                <Link className="orange-text" to="/login">
+                <Link className="primary-text" to="/login">
                   <b>Log in</b>
                 </Link>
               </p>

@@ -100,7 +100,7 @@ const Login = ({ loginUser, auth, errors }) => {
               <Button text="Log In" variant="primary" type="submit" />
               <p className="grey-text text-darken-1">
                 Don't have an account?{" "}
-                <Link className="orange-text" to="/register">
+                <Link className="primary-text" to="/register">
                   <b>Sign up</b>
                 </Link>
               </p>
