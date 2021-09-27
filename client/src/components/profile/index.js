@@ -10,7 +10,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
   const [updatedUserDetails, setUpdatedUserDetails] = useState({});
-  let container;
   useEffect(() => {
     setUpdatedUserDetails(userDetails);
   }, [userDetails]);
@@ -60,8 +59,8 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
         <div className="user-image-container">
           <div className="user-image">
             <img
-              className="circle"
-              alt="image"
+              className=""
+              alt="profile"
               src="https://www.atlassian.com/dam/jcr:ba03a215-2f45-40f5-8540-b2015223c918/Max-R_Headshot%20(1).jpg"
             />
             <div className="edit-photo-container">
@@ -70,7 +69,12 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
           </div>
         </div>
       </div>
-      <form noValidate className="pad-md" onSubmit={handleSubmit}>
+      <form
+        noValidate
+        className="pad-md"
+        onSubmit={handleSubmit}
+        id="profile-form"
+      >
         <div className="col m6 s12">
           <div className="input-field col s12">
             <span className="label-profile">Name</span>
@@ -81,7 +85,7 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
               placeholder="Enter your Name here"
               name="name"
               type="text"
-              className={classnames("", {
+              className={classnames("input-style", {
                 invalid: errors.name,
               })}
             />
@@ -98,7 +102,7 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
               name="email"
               type="email"
               disabled
-              className={classnames("", {
+              className={classnames("input-style", {
                 invalid: errors.email,
               })}
             />
@@ -114,7 +118,7 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
               name="phone"
               autoComplete="off"
               type="text"
-              className={classnames("", {
+              className={classnames("input-style", {
                 invalid: errors.phone,
               })}
             />
@@ -164,7 +168,7 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
               placeholder="Enter your Street here"
               name="street"
               type="text"
-              className={classnames("", {
+              className={classnames("input-style", {
                 invalid: errors.street,
               })}
             />
@@ -179,7 +183,7 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
               placeholder="Enter your City here"
               name="city"
               type="text"
-              className={classnames("", {
+              className={classnames("input-style", {
                 invalid: errors.city,
               })}
             />
@@ -194,7 +198,7 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
               placeholder="Enter your State/Province here"
               name="state"
               type="text"
-              className={classnames("", {
+              className={classnames("input-style", {
                 invalid: errors.state,
               })}
             />
@@ -209,7 +213,7 @@ const Profile = ({ updateUserDetails, userDetails, isUserUpdated, errors }) => {
               placeholder="Enter your Country here"
               name="country"
               type="text"
-              className={classnames("", {
+              className={classnames("input-style", {
                 invalid: errors.country,
               })}
               data-group="address"
