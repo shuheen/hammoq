@@ -1,7 +1,7 @@
+## Pre requisite
+nodemon to be installed gobally
+
 ## Quick Start
-
-
-
 ```javascript
 Clone the Repository
 Checkout branch `dev`
